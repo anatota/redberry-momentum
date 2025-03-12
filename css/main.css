@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'FiraGO', sans-serif;
+    background-color: #fff;
+}
+
+.content {
+    width: 1920px;
+    height: 1080px;
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+.main-header {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-logo {
+    width: 210px;
+    height: auto;
+}
+
+.create-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.create-employee, .create-task-container {
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.create-employee {
+    border: 1px solid #8338EC;
+    background-color: #fff;
+}
+
+.create-task-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #fff;
+    background-color: #8338EC;
+}
+
+.add-symbol {
+    width: 20px;
+    height: auto;
+}
