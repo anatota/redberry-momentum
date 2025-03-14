@@ -31,30 +31,69 @@ h1 {
     gap: 52px;
 }
 
-.task-item {
+.status-block {
     display: flex;
-    flex: 1;
     flex-direction: column;
-    align-items: center;
-    padding: 15px;
+}
+
+.status-item {
+    width: 381px;
+    padding: 15px 0;
     border-radius: 10px;
+    text-align: center;
     color: white;
     font-weight: bold;
     font-size: 20px;
 }
 
-.task-item.status-1 {
+.status-item.status-1 {
     background-color: #F7BC30;
 }
 
-.task-item.status-2 {
+.status-item.status-2 {
     background-color: #FB5607;
 }
 
-.task-item.status-3 {
+.status-item.status-3 {
     background-color: #FF006E;
 }
 
-.task-item.status-4 {
+.status-item.status-4 {
     background-color: #3A86FF;
+}
+
+.task-item {
+    width: inherit;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 30px;
+    background-color: beige;
+}
+
+.priority-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+}
+
+.priority-container.priority-1 {
+    color: green;
+}
+
+.left-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.task-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.task-content-header .date {
+    white-space: nowrap;
 }
