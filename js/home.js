@@ -13,19 +13,15 @@ async function fetchTaskStatus() {
                 'Content-Type': 'application/json'
             }
         });
-
         if (!response.ok) {
             throw new Error(`HTTP Error! Status: ${response.status}`);
         }
-
         const data = await response.json();
         return data;
     } catch (error) {
         console.error('Error fetching task status:', error);
     }
 }
-
-const statusList = []
 
 async function renderStatuses() {
     const statuses = await fetchTaskStatus();
@@ -39,14 +35,11 @@ async function renderStatuses() {
         statusElement.classList.add('status-item');
         statusElement.textContent = status.name;
         statusBlock.appendChild(statusElement);
-        statusList.push(status)
     }
     return statuses;
 }
 
 renderStatuses();
-
-// console.log(statusList);
 
 async function fetchTasks() {
     try {
@@ -78,37 +71,23 @@ renderTasks();
 
 function renderTaskHeader(tasks) {
     for(let task of tasks) {
-        // Create whole task element
-        const taskElement = createDiv('task-item');
-        // Create wrapper for the whole header of a single task
-        const contentHeader = createDiv('task-content-header');
-        // Create wrapper for the left side priority and department
-        const leftSide = createDiv('left-side');
-        // Create wrapper for priority icon and name
-        const priorityContainer = createDiv('priority-container');
-
-        const priorityName = task.priority.name;
-        const priorityIcon = task.priority.icon;
-        const priorityNameParagraph = createParagraph(priorityName);
-        const img = createImage(priorityIcon);
-        priorityContainer.classList.add(`priority-${task.priority.id}`)
-        priorityContainer.append(img, priorityNameParagraph);
-
-        const department = task.department.name;
-        const departmentParagraph = createParagraph(department);
-        const dueDate = task.due_date;
-        const dueDateConverted = formatDate(dueDate);
-        const dueDateParagraph = createParagraph(dueDateConverted);
-        dueDateParagraph.classList.add('date');
-        leftSide.append(priorityContainer, departmentParagraph);
-        contentHeader.append(leftSide, dueDateParagraph);
-
-        const statusBlocks = document.querySelectorAll('.status-block');
-        for (let block of statusBlocks) {
-            if (block.classList.contains(`status-${task.status.id}`)) {
-                block.appendChild(taskElement);
-                taskElement.append(contentHeader);
-            }
+        const taskHTML = `
+        <div class="task-item task-status-${task.status.id}">
+            <div class="task-content-header">
+                <div class="left-side">
+                    <div class="priority-container priority-${task.priority.id}">
+                        <img src="${task.priority.icon}" alt="${task.priority.name} priority icon">
+                        <p>${task.priority.name}</p>
+                    </div>
+                    <p class="department department-${task.department.id}">${task.department.name}</p>
+                </div>
+                <p class="date">${formatDate(task.due_date)}</p>
+            </div>
+        </div>
+        `;
+        const statusBlock = document.querySelector(`.status-block.status-${task.status.id}`);
+        if (statusBlock) {
+            statusBlock.insertAdjacentHTML('beforeend', taskHTML);
         }
     }
 }
@@ -120,23 +99,4 @@ function formatDate(isoString) {
         month: 'short',
         year: 'numeric'
     }).format(date);
-}
-
-function createDiv(className) {
-    const div = document.createElement('div');
-    div.classList.add(className);
-    return div;
-}
-
-function createParagraph(text) {
-    const p = document.createElement('p');
-    p.textContent = text;
-    return p;
-}
-
-function createImage(src, alt) {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = alt;
-    return img;
 }

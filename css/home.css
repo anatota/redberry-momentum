@@ -67,7 +67,7 @@ h1 {
     padding: 20px;
     border-radius: 15px;
     margin-top: 30px;
-    background-color: beige;
+    background-color: #fff;
 }
 
 .priority-container {
@@ -78,7 +78,15 @@ h1 {
 }
 
 .priority-container.priority-1 {
-    color: green;
+    color: #08A508;
+}
+
+.priority-container.priority-2 {
+    color: #FFBE0B;
+}
+
+.priority-container.priority-3 {
+    color: #FA4D4D;
 }
 
 .left-side {
@@ -96,4 +104,46 @@ h1 {
 
 .task-content-header .date {
     white-space: nowrap;
+    color: #212529;
+}
+
+.left-side .department {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    width: 40%;
+    padding: 5px 9px;
+    border-radius: 15px;
+} 
+
+.left-side .department-1 {
+    background-color: #A2D8A2;
+}
+
+.left-side .department-2 {
+    background-color: #D2A3FF;
+}
+
+.left-side .department-3 {
+    background-color: #66CCCC;
+}
+
+.left-side .department-4 {
+    background-color: #FD9A6A;
+}
+
+.left-side .department-5 {
+    background-color: #89B6FF;
+}
+
+.left-side .department-6 {
+    background-color: #FFD86D;
+}
+
+.left-side .department-7 {
+    background-color: #FF66A8;
+}
+
+.task-item.task-status-1 {
+    border: 1px solid #F7BC30;
 }
