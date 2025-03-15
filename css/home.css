@@ -63,7 +63,11 @@ h1 {
 }
 
 .task-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: inherit;
+    height: 230px;
     padding: 20px;
     border-radius: 15px;
     margin-top: 30px;
@@ -146,4 +150,52 @@ h1 {
 
 .task-item.task-status-1 {
     border: 1px solid #F7BC30;
+}
+
+.task-item.task-status-2 {
+    border: 1px solid #FB5607;
+}
+
+.task-item.task-status-3 {
+    border: 1px solid #FF006E;
+}
+
+.task-item.task-status-4 {
+    border: 1px solid #3A86FF;
+}
+
+.task-content {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 14px;
+    gap: 12px;
+}
+
+.task-content .task-name {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.task-content .task-description {
+    font-size: 14px;
+}
+
+.employee-avatar {
+    width: 31px;
+    height: auto;
+}
+
+.task-content-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comments-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }

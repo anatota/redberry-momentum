@@ -62,15 +62,9 @@ async function fetchTasks() {
 
 async function renderTasks() {
     const tasks = await fetchTasks();
-    console.log(tasks)
-    renderTaskHeader(tasks);
-    return tasks;
-}
-
-renderTasks();
-
-function renderTaskHeader(tasks) {
+    console.log(tasks);
     for(let task of tasks) {
+        const description = formatDescription(task.description);
         const taskHTML = `
         <div class="task-item task-status-${task.status.id}">
             <div class="task-content-header">
@@ -83,6 +77,17 @@ function renderTaskHeader(tasks) {
                 </div>
                 <p class="date">${formatDate(task.due_date)}</p>
             </div>
+            <div class="task-content">
+                <p class="task-name">${task.name}</p>
+                <p class="task-description">${description}</p>
+            </div>
+            <div class="task-content-footer">
+                <img src="${task.employee.avatar}" alt="${task.employee.name.concat(" ", task.employee.surname)} avatar" class="employee-avatar">
+                <div class="comments-container">
+                    <img src="../img/comments.svg" alt="comments" class="comments-icon">
+                    <span class="comment-num">${task.total_comments}</span>
+                </div>
+            </div>
         </div>
         `;
         const statusBlock = document.querySelector(`.status-block.status-${task.status.id}`);
@@ -90,6 +95,16 @@ function renderTaskHeader(tasks) {
             statusBlock.insertAdjacentHTML('beforeend', taskHTML);
         }
     }
+    return tasks;
+}
+
+renderTasks();
+
+function formatDescription(description) {
+    if (description.length > 100) {
+        return `${description.slice(0, 100)}...`
+    }
+    return description;
 }
 
 function formatDate(isoString) {
