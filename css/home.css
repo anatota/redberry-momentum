@@ -78,21 +78,26 @@ h1 {
 
 .priority-container {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 4px;
     padding: 4px;
+    border-radius: 5px;
 }
 
 .priority-container.priority-1 {
     color: #08A508;
+    border: 1px solid #08A508;
 }
 
 .priority-container.priority-2 {
     color: #FFBE0B;
+    border: 1px solid #FFBE0B;
 }
 
 .priority-container.priority-3 {
     color: #FA4D4D;
+    border: 1px solid #FA4D4D;
 }
 
 .left-side {
@@ -115,11 +120,13 @@ h1 {
 
 .left-side .department {
     display: flex;
+    align-items: center;
     justify-content: center;
     color: #fff;
     width: 40%;
     padding: 5px 9px;
     border-radius: 15px;
+    text-align: center;
 } 
 
 .left-side .department-1 {

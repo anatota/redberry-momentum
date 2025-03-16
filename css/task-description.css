@@ -1,0 +1,106 @@
+.main-container {
+    /* background-color:aliceblue; */
+}
+
+.task-description-container {
+    width: 715px;
+    /* background-color: aquamarine; */
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.icon-container p {
+    color: #474747;
+}
+
+.task-heading {
+    color: #2A2A2A;
+    margin-top: 73px;
+    margin-bottom: 28px;
+}
+
+.details-container {
+    width: 500px;
+    /* background-color: antiquewhite; */
+}
+
+.details-container div {
+    padding: 10px 0;
+}
+
+.top-icons {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 12px;
+}
+
+.priority-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 5px;
+    border-radius: 5px;
+}
+
+.priority-container.priority-1 {
+    color: #08A508;
+    border: 1px solid #08A508;
+}
+
+.priority-container.priority-2 {
+    color: #FFBE0B;
+    border: 1px solid #FFBE0B;
+}
+
+.priority-container.priority-3 {
+    color: #FA4D4D;
+    border: 1px solid #FA4D4D;
+}
+
+.department {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    width: 40%;
+    padding: 5px 10px;
+    border-radius: 15px;
+    text-align: center;
+} 
+
+.department-1 {
+    background-color: #A2D8A2;
+}
+
+.department-2 {
+    background-color: #D2A3FF;
+}
+
+.department-3 {
+    background-color: #66CCCC;
+}
+
+.department-4 {
+    background-color: #FD9A6A;
+}
+
+.department-5 {
+    background-color: #89B6FF;
+}
+
+.department-6 {
+    background-color: #FFD86D;
+}
+
+.department-7 {
+    background-color: #FF66A8;
+}
+
+.task-name {
+    margin-bottom: 26px;
+}
