@@ -174,6 +174,7 @@ async function loadComments() {
 async function countComments() {
     const comments = await loadComments();
     let count = comments.length;
+    if (count == 0) return count;
     comments.forEach(comment => {
         if(comment.sub_comments.length > 0) {
             count += comment.sub_comments.length;
@@ -189,3 +190,36 @@ async function loadCommentCount() {
 }
 
 loadCommentCount();
+
+async function renderComments() {
+    const comments = await loadComments();
+    if (comments.length == 0) return;
+    const commentSection = document.getElementById('comment-section');
+    comments.forEach(comment => {
+        console.log(comment)
+        const html = buildHTML(comment);
+        commentSection.insertAdjacentHTML('afterbegin', html);
+    });
+}
+
+function buildHTML(comment) {
+    return `
+            <div class="comment-element">
+                <div class="comment-top-section">
+                    <img src="${comment.author_avatar}" alt="comment author avatar">
+                    <div class="comment-text-wrapper">
+                        <h5>${comment.author_nickname}</h5>
+                        <p>${comment.text}</p>
+                        <div class="reply-wrapper">
+                            <img src="../img/reply-icon.svg" alt="reply icon">
+                            <p class="reply-text">უპასუხე</p>
+                            <div id="subcomment-section">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+}
+
+renderComments();
