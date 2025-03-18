@@ -1,10 +1,5 @@
-.main-container {
-    /* background-color:aliceblue; */
-}
-
 .task-description-container {
     width: 715px;
-    /* background-color: aquamarine; */
 }
 
 .icon-container {
@@ -25,7 +20,6 @@
 
 .details-container {
     width: 500px;
-    /* background-color: antiquewhite; */
 }
 
 .details-container div {
@@ -103,4 +97,46 @@
 
 .task-name {
     margin-bottom: 26px;
+}
+
+select[name="status-list"] {
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    padding: 14px;
+    border: 1px solid #CED4DA;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.employee-wrapper img {
+    width: 32px;
+    height: auto;
+    border-radius: 32px;
+}
+
+.details-container {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+}
+
+.keys {
+    display: flex;
+    flex-direction: column;
+}
+
+.values {
+    display: flex;
+    flex-direction: column;
+}
+
+.employee-avatar-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#department-name {
+    color: #474747;
 }
