@@ -75,7 +75,9 @@ async function getStatuses() {
 async function renderStatuses() {
     const dropdown = document.getElementById('status-list');
     const statuses = await getStatuses();
+    const task = await fetchTask();
     dropdown.innerHTML = statuses.map(status => `<option value="${status.name}">${status.name}</option>`).join('');
+    dropdown.value = task.status.name;
 }
 
 renderStatuses();
@@ -116,3 +118,38 @@ function formatDate(dateString) {
 }
 
 renderDate();
+
+async function updateTaskStatus(id, newStatus) {
+    const updatedData = {
+        "status_id" : newStatus
+    }
+    try {
+        const response = await fetch(API_URL_TASK, {
+            method: 'PUT',
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization' : `Bearer ${token}`
+            },
+            body : JSON.stringify(updatedData)
+        });
+        if(!response.ok) {
+            throw new Error(`HTTP Error! Status: ${response.status}`);
+        }
+        const responseData = await response.json();
+        console.log(responseData);
+        return responseData;
+    } catch (error) {
+        console.error('Error updating task status: ', error);
+    }
+}
+
+const dropdown = document.getElementById('status-list');
+dropdown.addEventListener('change', async function() {
+    const selectedStatus = dropdown.value;
+    const statuses = await getStatuses();
+    statuses.forEach(status => {
+        if(status.name === selectedStatus) {
+            updateTaskStatus(taskId, status.id);
+        }
+    });
+});
