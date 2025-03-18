@@ -23,33 +23,45 @@
             </div>
         </header>
         <div class="main-container">
-            <div id="task-description" class="task-description-container"></div>
-            <h3 class="task-heading">დავალების დეტალები</h3>
-            <div class="details-container">
-                <div class="keys">
-                    <div class="task-status">
-                        <div class="icon-container">
-                            <img src="./img/pie-chart.svg" alt="pie-chart">
-                            <p>სტატუსი</p>
+            <div class="details">
+                <div id="task-description" class="task-description-container"></div>
+                <h3 class="task-heading">დავალების დეტალები</h3>
+                <div class="details-container">
+                    <div class="keys">
+                        <div class="task-status">
+                            <div class="icon-container">
+                                <img src="./img/pie-chart.svg" alt="pie-chart">
+                                <p>სტატუსი</p>
+                            </div>
+                        </div>
+                        <div class="task-employee">
+                            <div class="icon-container">
+                                <img src="./img/user.svg" alt="user">
+                                <p>თანამშრომელი</p>
+                            </div>
+                        </div>
+                        <div class="task-due">
+                            <div class="icon-container">
+                                <img src="./img/calendar.svg" alt="calendar">
+                                <p>დავალების ვადა</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="task-employee">
-                        <div class="icon-container">
-                            <img src="./img/user.svg" alt="user">
-                            <p>თანამშრომელი</p>
-                        </div>
-                    </div>
-                    <div class="task-due">
-                        <div class="icon-container">
-                            <img src="./img/calendar.svg" alt="calendar">
-                            <p>დავალების ვადა</p>
-                        </div>
+                    <div class="values">
+                        <select name="status-list" id="status-list"></select>
+                        <div class="employee-wrapper" id="employee-wrapper"></div>
+                        <p id="due-date"></p>
                     </div>
                 </div>
-                <div class="values">
-                    <select name="status-list" id="status-list"></select>
-                    <div class="employee-wrapper" id="employee-wrapper"></div>
-                    <p id="due-date"></p>
+            </div>
+            <div class="comments">
+                <div class="textarea-container">
+                    <textarea name="comment-area" id="comment-area" placeholder="დაწერე კომენტარი"></textarea>
+                    <button id="submit-comment" class="submit-btn">დააკომენტარე</button>
+                </div>
+                <div class="comment-num-wrapper">
+                    <h4 class="comments-heading">კომენტარები</h4>
+                    <p id="comment-count"></p>
                 </div>
             </div>
         </div>

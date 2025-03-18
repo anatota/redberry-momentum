@@ -3,9 +3,9 @@ const taskId = urlParams.get('taskId');
 
 const API_URL_TASK = `https://momentum.redberryinternship.ge/api/tasks/${taskId}`;
 const API_URL_STATUSES = 'https://momentum.redberryinternship.ge/api/statuses';
+const API_URL_COMMENTS = `https://momentum.redberryinternship.ge/api/tasks/${taskId}/comments`;
 const token = '9e6dffb0-c41e-459d-9630-7b729c73ee73';
 
-console.log(taskId);
 const taskContainer = document.getElementById('task-description');
 
 async function fetchTask() {
@@ -31,7 +31,6 @@ fetchTask();
 
 async function renderDescription() {
     const task = await fetchTask();
-    console.log(task)
     const html = `
         <div class="top-icons">
             <div class="priority-container priority-${task.priority.id}">
@@ -106,13 +105,13 @@ async function renderDate() {
 
 function formatDate(dateString) {
     const daysOfWeek = ["კვი", "ორშ", "სამ", "ოთხშ", "ხუთშ", "პარ", "შაბ"];
-    // Parse the date string into a Date object
     const date = new Date(dateString);
     // Get day of the week (0 - Sunday, 6 - Saturday) using UTC methods
     const dayOfWeek = daysOfWeek[date.getUTCDay()];
     // Get the day, month, and year using UTC methods
     const day = date.getUTCDate();
-    const month = date.getUTCMonth() + 1;  // months are 0-indexed
+    // Months are 0 indexed
+    const month = date.getUTCMonth() + 1;
     const year = date.getUTCFullYear();
     return `${dayOfWeek} - ${day}/${month}/${year}`;
 }
@@ -136,7 +135,6 @@ async function updateTaskStatus(id, newStatus) {
             throw new Error(`HTTP Error! Status: ${response.status}`);
         }
         const responseData = await response.json();
-        console.log(responseData);
         return responseData;
     } catch (error) {
         console.error('Error updating task status: ', error);
@@ -153,3 +151,41 @@ dropdown.addEventListener('change', async function() {
         }
     });
 });
+
+async function loadComments() {
+    try {
+        const response = await fetch(API_URL_COMMENTS, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        const json = response.json();
+        return json;
+    } catch(error) {
+        console.error(`Error loading comments! ${error.message}`);
+    }
+}
+
+async function countComments() {
+    const comments = await loadComments();
+    let count = comments.length;
+    comments.forEach(comment => {
+        if(comment.sub_comments.length > 0) {
+            count += comment.sub_comments.length;
+        }
+    });
+    return count;
+}
+
+async function loadCommentCount() {
+    const commentCount = document.getElementById('comment-count');
+    const numberOfComments = await countComments();
+    commentCount.innerHTML = numberOfComments;
+}
+
+loadCommentCount();

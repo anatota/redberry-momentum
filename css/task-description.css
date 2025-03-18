@@ -140,3 +140,86 @@ select[name="status-list"] {
 #department-name {
     color: #474747;
 }
+
+.main-container {
+    display: flex;
+    gap: 223px;
+}
+
+.details {
+    width: 715px;
+}
+
+.comments {
+    width: 741px;
+    padding: 40px 45px 52px;
+    border-radius: 10px;
+    border: 1px solid #DDD2FF;
+    background: rgba(248, 243, 254, 0.65);
+    position: relative;
+}
+
+.comments textarea {
+    font-family: inherit;
+    padding: 18px 20px;
+    padding-bottom: 50px;
+    width: 100%;
+    height: 100px;
+    resize: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ADB5BD;
+    border-bottom: 50px solid #fff;
+}
+
+.textarea-container {
+    position: relative;
+}
+
+.submit-btn {
+    font-family: inherit;
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    background-color: #8338EC;
+    color: #fff;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #B588F4;
+}
+
+.submit-btn:active {
+    background-color: #B588F4;
+    box-shadow: 0 4px rgba(181, 136, 244, 0.3);
+}
+
+.comments-heading {
+    font-size: 20px;
+}
+
+.comment-num-wrapper {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.comment-num-wrapper p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-radius: 30px;
+    background-color: #8338EC;
+    color: #fff;
+    height: 22px;
+}
