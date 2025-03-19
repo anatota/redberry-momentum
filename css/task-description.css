@@ -254,7 +254,12 @@ select[name="status-list"] {
 
 .reply-wrapper {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.reply-icon-wrapper {
+    display: flex;
     gap: 6px;
 }
 
@@ -265,4 +270,16 @@ select[name="status-list"] {
 
 .reply-wrapper img {
     width: 16px;
+}
+
+.sub-comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.subcomment-text-wrapper {
+    display: flex;
+    flex-direction: column;
 }

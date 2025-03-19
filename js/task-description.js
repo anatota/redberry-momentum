@@ -195,10 +195,9 @@ async function renderComments() {
     const comments = await loadComments();
     if (comments.length == 0) return;
     const commentSection = document.getElementById('comment-section');
+    commentSection.innerHTML = '';
     comments.forEach(comment => {
-        console.log(comment)
-        const html = buildHTML(comment);
-        commentSection.insertAdjacentHTML('afterbegin', html);
+        commentSection.insertAdjacentHTML('afterbegin', buildHTML(comment));
     });
 }
 
@@ -211,15 +210,31 @@ function buildHTML(comment) {
                         <h5>${comment.author_nickname}</h5>
                         <p>${comment.text}</p>
                         <div class="reply-wrapper">
-                            <img src="../img/reply-icon.svg" alt="reply icon">
-                            <p class="reply-text">უპასუხე</p>
-                            <div id="subcomment-section">
+                            <div class="reply-icon-wrapper">
+                                <img src="../img/reply-icon.svg" alt="reply icon">
+                                <p class="reply-text">უპასუხე</p>
+                            </div>
+                            <div class="subcomment-section">
+                                ${comment.sub_comments.length > 0 ? renderSubcomments(comment) : ''}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         `;
+}
+
+function renderSubcomments(comment) {
+    return comment.sub_comments.map(subComment => `
+        <div class="sub-comment">
+            <img src="${subComment.author_avatar}" alt="subcomment author avatar">
+            <div class="subcomment-text-wrapper">
+                <h5>${subComment.author_nickname}</h5>        
+                <p>${subComment.text}</p>
+            </div>
+        </div>
+        `
+    ).join('');
 }
 
 renderComments();
