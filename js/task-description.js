@@ -202,6 +202,8 @@ async function renderComments() {
 }
 
 function buildHTML(comment) {
+    const subComments = comment.sub_comments ?? []; // Use empty array if undefined
+
     return `
             <div class="comment-element">
                 <div class="comment-top-section">
@@ -215,7 +217,7 @@ function buildHTML(comment) {
                                 <p class="reply-text">უპასუხე</p>
                             </div>
                             <div class="subcomment-section">
-                                ${comment.sub_comments.length > 0 ? renderSubcomments(comment) : ''}
+                                ${subComments.length > 0 ? renderSubcomments(comment) : ''}
                             </div>
                         </div>
                     </div>
@@ -238,3 +240,42 @@ function renderSubcomments(comment) {
 }
 
 renderComments();
+
+submitBtn = document.getElementById('submit-comment');
+submitBtn.addEventListener('click', async function() {
+    const text = document.getElementById('comment-area').value.trim();
+    if(!text) {
+        alert('Comment cannot be empty!');
+        return;
+    }
+    const newComment = {
+        "text" : text,
+        "parent_id" : null,
+
+    };
+
+    try {
+        const response = await fetch(API_URL_COMMENTS, {
+            method: "POST",
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept':"application/json",
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(newComment)
+        });
+        if(!response.ok ) {
+            const errorText = await response.text();
+            throw new Error(`Server Error: ${response.status} - ${errorText}`);
+        }
+        const savedComment = await response.json();
+        const commentSection = document.getElementById('comment-section');
+        commentSection.insertAdjacentHTML('afterbegin', buildHTML(savedComment));
+        document.getElementById('comment-area').value = "";
+        loadCommentCount();
+        console.log('new comment added!')
+    } catch(error) {
+        console.error(error);
+        alert("Error adding comment. Please try again.");
+    }
+});

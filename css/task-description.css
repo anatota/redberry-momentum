@@ -162,6 +162,7 @@ select[name="status-list"] {
     border: 1px solid #DDD2FF;
     background: rgba(248, 243, 254, 0.65);
     position: relative;
+    overflow-y: auto;
 }
 
 .comments textarea {
@@ -261,6 +262,7 @@ select[name="status-list"] {
 .reply-icon-wrapper {
     display: flex;
     gap: 6px;
+    cursor: pointer;
 }
 
 .reply-text {
