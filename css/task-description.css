@@ -285,3 +285,30 @@ select[name="status-list"] {
     display: flex;
     flex-direction: column;
 }
+
+#comment-reply-area {
+    width: 100%;
+}
+
+.submit-reply-btn {
+    font-family: inherit;
+    position: absolute;
+    background-color: #8338EC;
+    color: #fff;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-reply-btn:hover {
+    background-color: #B588F4;
+}
+
+.submit-reply-btn:active {
+    background-color: #B588F4;
+    box-shadow: 0 4px rgba(181, 136, 244, 0.3);
+}

@@ -197,13 +197,92 @@ async function renderComments() {
     const commentSection = document.getElementById('comment-section');
     commentSection.innerHTML = '';
     comments.forEach(comment => {
-        commentSection.insertAdjacentHTML('afterbegin', buildHTML(comment));
+        commentSection.insertAdjacentHTML('beforeend', buildHTML(comment));
     });
+
+    addReply();
+}
+
+function addReply() {
+    const replyBtns = document.querySelectorAll('.reply-icon-wrapper');
+    replyBtns.forEach(replyBtn => {
+        replyBtn.addEventListener('click', async function() {
+            const parentId = replyBtn.dataset.parentId;
+            console.log(parentId)
+            const subCommentSection = replyBtn.closest('.comment-element').querySelector('.subcomment-section');
+            if (subCommentSection) {
+                let existingReplyContainer = subCommentSection.querySelector('.reply-container');
+                if (existingReplyContainer) {
+                    existingReplyContainer.remove();
+                } else {
+                    const replyContainer = document.createElement('div');
+                    replyContainer.classList.add('reply-container');
+                    const html = `
+                    <textarea name="comment-reply-area" class="comment-reply-area" placeholder="დაწერე პასუხი"></textarea>
+                    <input type="submit" value="დააკომენტარე" class="submit-reply-btn"></input>
+                    `;
+                    replyContainer.insertAdjacentHTML('afterbegin', html);
+                    subCommentSection.appendChild(replyContainer);
+
+                    const submitReplyBtn = replyContainer.querySelector('.submit-reply-btn');
+                    submitReplyBtn.addEventListener('click', async function() {
+                        await submitReply(parentId, replyContainer);
+                    });
+                }
+            }
+        })
+    });
+}
+
+async function submitReply(parentId, replyContainer) {
+    const textarea = replyContainer.querySelector('.comment-reply-area');
+    const replyText = textarea.value.trim();
+    if (!replyText) {
+        alert('Reply cannot be empty !');
+        return;
+    }
+    const newReply = {
+        "text":replyText,
+        "parent_id":parentId
+    };
+    try {
+        const response = await fetch(API_URL_COMMENTS, {
+            method: "POST",
+            headers: {
+                'Authorization' : `Bearer ${token}`,
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(newReply)
+        });
+        if(!response.ok ) {
+            const errorText = await response.text();
+            throw new Error(`${response.status} - ${errorText}`);
+        }
+        const savedReply = await response.json();
+        const subCommentSection = replyContainer.closest('.subcomment-section');
+        const replyHTML = `
+            <div class="sub-comment">
+                <img src="${savedReply.author_avatar}" alt="subcomment author avatar">
+                <div class="subcomment-text-wrapper">
+                    <h5>${savedReply.author_nickname}</h5>        
+                    <p>${savedReply.text}</p>
+                </div>
+            </div>
+        `;
+        subCommentSection.insertAdjacentHTML('beforeend', replyHTML);
+
+        // Clear the reply box after adding new reply
+        replyContainer.remove();
+        loadCommentCount();
+    } catch(error) {
+        console.error(error);
+        alert('Error adding reply.');
+    }
 }
 
 function buildHTML(comment) {
     const subComments = comment.sub_comments ?? []; // Use empty array if undefined
-
     return `
             <div class="comment-element">
                 <div class="comment-top-section">
@@ -212,7 +291,7 @@ function buildHTML(comment) {
                         <h5>${comment.author_nickname}</h5>
                         <p>${comment.text}</p>
                         <div class="reply-wrapper">
-                            <div class="reply-icon-wrapper">
+                            <div class="reply-icon-wrapper" data-parent-id="${comment.id}">
                                 <img src="../img/reply-icon.svg" alt="reply icon">
                                 <p class="reply-text">უპასუხე</p>
                             </div>
