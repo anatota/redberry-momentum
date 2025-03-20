@@ -286,7 +286,7 @@ select[name="status-list"] {
     flex-direction: column;
 }
 
-#comment-reply-area {
+.comment-reply-area {
     width: 100%;
 }
 

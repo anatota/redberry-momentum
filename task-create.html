@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Momentum</title>
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/task-create.css">
     <link rel="icon" type="image/x-icon" href="./img/hourglass.svg">
 </head>
 <body>
@@ -21,6 +22,50 @@
                 </div>
             </div>
         </header>
+        <h1>შექმენი ახალი დავალება</h1>
+        <div class="form-container">
+            <form action="">
+                <div class="left-side">
+                    <div class="title-container">
+                        <label for="title">სათაური*</label>
+                        <input type="text">
+                        <span>მინიმუმ 3 სიმბოლო</span>
+                        <span>მაქსიმუმ 255 სიმბოლო</span>
+                    </div>
+                    <div class="description-container">
+                        <label for="description">აღწერა</label>
+                        <textarea id="description" name="description" rows="4" maxlength="255"></textarea>
+                        <span>მინიმუმ 4 სიტყვა (თუ ჩაიწერა რაიმე)</span>
+                        <span>მაქსიმუმ 255 სიმბოლო (თუ ჩაიწერა რაიმე)</span>
+                    </div>
+                    <div class="priority-and-status-container">
+                        <div class="priority-container">
+                            <label for="priority">პრიორიტეტი*</label>
+                            <select name="priority" id="priority-list"></select>
+                        </div>
+                        <div class="status-container">
+                            <label for="status">სტატუსი*</label>
+                            <select name="status" id="status-list"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-side">
+                    <div class="department-container">
+                        <label for="department">დეპარტამენტი*</label>
+                        <select name="department" id="department-list"></select>
+                    </div>
+                    <div class="employee-container">
+                        <label for="employee">პასუხისმგებელი თანამშრომელი*</label>
+                        <select name="employee" id="employee-list"></select>
+                    </div>
+                    <div class="deadline-container">
+                        <label for="deadline">დედლაინი</label>
+                        <input type="date" id="date-pick" class="calendar">
+                    </div>
+                    <input type="submit" value="დავალების შექმნა">
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
