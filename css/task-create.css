@@ -67,6 +67,7 @@ h1 {
 }
 
 input, select, textarea {
+    font-family: inherit;
     padding: 14px;
     margin-top: 7px;
     width: 100%;
