@@ -208,3 +208,7 @@ h1 {
     align-items: center;
     gap: 4px;
 }
+
+.logo-container {
+    cursor: pointer;
+}

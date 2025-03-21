@@ -4,5 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
         taskBtn.addEventListener('click', () => {
             window.location.href = 'task-create.html';
         });
-    })
+    });
+    const homeBtn = document.querySelector('.logo-container');
+    homeBtn.addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
 });
