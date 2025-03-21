@@ -40,7 +40,7 @@ async function renderDescription() {
             <p class="department department-${task.department.id}">${task.department.name}</p>
         </div>
         <h1 class="task-name">${task.name}</h1>
-        <p>${task.description}</p>
+        <p>${task.description == null ? '' : task.description}</p>
     `;
     taskContainer.insertAdjacentHTML('afterbegin', html);
 }

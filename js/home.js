@@ -117,6 +117,7 @@ function buildHTML(task) {
 }
 
 function formatDescription(description) {
+    if(!description) return '';
     if (description.length > 100) {
         return `${description.slice(0, 100)}...`
     }
